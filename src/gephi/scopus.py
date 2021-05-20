@@ -30,7 +30,7 @@ def read(fname):
         Content of file in dataframe format
     """
     
-    return pd.read_csv(fname)
+    return pd.read_csv(fname, error_bad_lines=False, warn_bad_lines=False)
 
 def get_node(fname, known_ams=pd.Series(), fold=""):
     """
@@ -56,8 +56,8 @@ def get_node(fname, known_ams=pd.Series(), fold=""):
     # else
     df = read(fold+fname)
     if len(df) == 20000:
-        print(f"Warning: export file {fname} at or over max amount, "+\
-              "but no amount provided.")
+        print(f"  WARNING: export file '{fname}' at or over max amount of "+\
+              "20,000, but no amount provided.")
     return len(df)
 
 def get_edge(fname1, fname2, known_ams=pd.Series(), fold=""):

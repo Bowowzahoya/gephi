@@ -61,11 +61,20 @@ def get_nodes(fnames, known_ams=pd.Series(), db="scopus",
     
 
     for i, fname in enumerate(fnames):
+        print(f"Reading node '{fname}'...")
         name = fname[:-4]
         nodes.loc[name, LB_COL] = name
-        nodes.loc[name, SZ_COL] = get_node(fname, known_ams, fold=fold)
+        try:
+            nodes.loc[name, SZ_COL] = get_node(fname, known_ams, fold=fold)
+        except:
+            print(f"Error while loading file '{fname}'. Error:")
+            raise
         if int_sim:
-            nodes.loc[name, IS_COL] = get_int_sim(fname, fold=fold)
+            try:
+                nodes.loc[name, IS_COL] = get_int_sim(fname, fold=fold)
+            except:
+                print(f"Error while calculating internal similarity for '{fname}'. Error:")
+                raise
     nodes.index.name = ID_COL
     return nodes
 
@@ -76,16 +85,21 @@ def get_edges(fnames, known_ams=pd.Series(), db="scopus",
     
     i = 0
     for j, fname1 in enumerate(fnames):
+        print(f"Reading edges for '{fname1}'")
         for k, fname2 in enumerate(fnames):
             if fname1==fname2:
                 continue
+            print(f"\t with '{fname2}'...")
             
             name1 = fname1[:-4]
             name2 = fname2[:-4]
             edges.loc[i, SC_COL] = name1
             edges.loc[i, TG_COL] = name2
-            edges.loc[i, W_COL] = get_edge(fname1, fname2, known_ams, fold=fold)
-
+            try:
+                edges.loc[i, W_COL] = get_edge(fname1, fname2, known_ams, fold=fold)
+            except:
+                print(f"Error while loading file '{fname2}'. Error:")
+                raise
             i +=  1
     return edges
     
