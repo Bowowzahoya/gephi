@@ -21,7 +21,7 @@ known_ams = pd.read_excel(ams_fname,
 # calculate
 # int_sim=True to calculate internal similarity
 # set False for faster performance
-nodes = gp.get_nodes(fnames, known_ams=known_ams, int_sim=False, fold=folder)
+nodes = gp.get_nodes(fnames, known_ams=known_ams, int_sim=True, fold=folder)
 edges = gp.get_edges(fnames, known_ams=known_ams, fold=folder)
 
 # export
