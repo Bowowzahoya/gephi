@@ -85,7 +85,7 @@ def get_edge(fname1, fname2, known_ams=pd.Series(), fold=""):
     df2 = read(fold+fname2)
     
     am1 = known_ams.get(fname1, len(df1))
-    am2 = known_ams.get(fname2, len(df1))
+    am2 = known_ams.get(fname2, len(df2))
 
     min_cov = min(len(df1)/am1, len(df2)/am2)
     
