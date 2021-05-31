@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Functions for dealing with Scopus data
+Functions for dealing with Lens patent data
 all on the basis of filename
 
 - get_node()
@@ -12,12 +12,12 @@ import pandas as pd
 
 from .tools import cossim
 
-EID_COL = "EID"
+LID_COL = "Lens ID"
 TI_COL = "Title"
 
 def read(fname):
     """
-    Reads an export from Scopus
+    Reads an export from Lens
 
     Parameters
     ----------
@@ -55,9 +55,9 @@ def get_node(fname, known_ams=pd.Series(), fold=""):
         return known_ams[fname]
     # else
     df = read(fold+fname)
-    if len(df) == 20000:
+    if len(df) >= 50000-10:
         print(f"  WARNING: export file '{fname}' at or over max amount of "+\
-              "20,000, but no amount provided.")
+              "50,000, but no amount provided.")
     return len(df)
 
 def get_edge(fname1, fname2, known_ams=pd.Series(), fold=""):
@@ -89,8 +89,8 @@ def get_edge(fname1, fname2, known_ams=pd.Series(), fold=""):
 
     min_cov = min(len(df1)/am1, len(df2)/am2)
     
-    overlap = df1[df1[EID_COL].isin(df2[EID_COL])]
-    return (len(overlap)/am1)/min_cov
+    overlap = df1[df1[LID_COL].isin(df2[LID_COL])]
+    return (len(overlap)/len(df1))/min_cov
 
 def get_int_sim(fname, fold=""):
     """

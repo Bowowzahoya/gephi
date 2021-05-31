@@ -10,8 +10,8 @@ Main functions:
 """
 import pandas as pd
 
-from . import scopus as sc
-from . import lens_patent as lp
+import .scopus as sc
+import .lens_patent as lp
 
 LB_COL = "Label"
 SR_COL = "Strength"

@@ -12,7 +12,7 @@ import pandas as pd
 
 from .tools import cossim
 
-EID_COL = "EID"
+DOI_COL = "DOI"
 TI_COL = "Title"
 
 def read(fname):
@@ -81,16 +81,22 @@ def get_edge(fname1, fname2, known_ams=pd.Series(), fold=""):
     strgth : Series
         edges of node, with index node pair, value strength
     """
+    print(fname1, fname2)
     df1 = read(fold+fname1)
     df2 = read(fold+fname2)
     
     am1 = known_ams.get(fname1, len(df1))
     am2 = known_ams.get(fname2, len(df2))
+    print(am1, am2)
 
     min_cov = min(len(df1)/am1, len(df2)/am2)
+    print(min_cov)
     
-    overlap = df1[df1[EID_COL].isin(df2[EID_COL])]
-    return (len(overlap)/am1)/min_cov
+    overlap = df1[df1[DOI_COL].isin(df2[DOI_COL])]
+    print(overlap)
+    print(len(overlap))
+    print((len(overlap)/len(df1))/min_cov)
+    return (len(overlap)/len(df1))/min_cov
 
 def get_int_sim(fname, fold=""):
     """
