@@ -11,7 +11,7 @@ import os
 from context import gephi
 from gephi import combine as cb
 
-FOLD = "res/"
+FOLD = "res/scopus/"
 
 class TestGetNodesEdges(unittest.TestCase):
     @classmethod
@@ -22,24 +22,26 @@ class TestGetNodesEdges(unittest.TestCase):
                       "journals_journal of controlled release.csv",
                       "medical nanotechnology.csv",
                       "nanomedicine.csv", "nanoprobe.csv"]
+        cls.fnames = [FOLD+f for f in cls.fnames]
                       
+    
     @unittest.skip
     def testNodes(self):
-        dfn = cb.get_nodes(self.fnames, self.known_ams, fold=FOLD)
+        dfn = cb.get_nodes(self.fnames, limited_node_sizes=self.known_ams)
         dfn.to_excel("out/nodes.xlsx")
         assert dfn.loc["drug delivery system", "Size"] == 110301
-        
+       
+    @unittest.skip
     def testNodesIntSim(self):
-        dfn = cb.get_nodes(self.fnames, self.known_ams, 
-                           int_sim = True, fold=FOLD)
+        dfn = cb.get_nodes(self.fnames, limited_node_sizes=self.known_ams, 
+                           includes_internal_similarity = True)
         dfn.to_excel("out/nodes_int_sim.xlsx")
         assert dfn.loc["drug delivery system", "Size"] == 110301
         
-    @unittest.skip
     def testEdges(self):
-        dfe = cb.get_edges(self.fnames, self.known_ams, fold=FOLD)
+        dfe = cb.get_edges(self.fnames, limited_node_sizes=self.known_ams)
         dfe.to_excel("out/edges.xlsx")
-        assert round(dfe.loc[8, "Weight"], 3) == 0.240
+        assert round(dfe.loc[8, "Weight"], 3) == 0.168
         
 
         

@@ -10,7 +10,7 @@ import pandas as pd
 
 # where all keyword exports are located
 folder = "scopus exports/"
-fnames = os.listdir(folder)
+fnames = [folder+f for f in os.listdir(folder)]
 
 # the true amounts for keywords with more publications than the
 # maximum limit of 20,000 for downloading
@@ -21,8 +21,9 @@ known_ams = pd.read_excel(ams_fname,
 # calculate
 # int_sim=True to calculate internal similarity
 # set False for faster performance
-nodes = gp.get_nodes(fnames, known_ams=known_ams, int_sim=True, fold=folder)
-edges = gp.get_edges(fnames, known_ams=known_ams, fold=folder)
+nodes = gp.get_nodes(fnames, limited_node_sizes=known_ams, 
+                     includes_internal_similarity=True)
+edges = gp.get_edges(fnames, limited_node_sizes=known_ams)
 
 # export
 nodes.to_excel("out/nodes.xlsx")

@@ -8,9 +8,9 @@ import unittest
 import pandas as pd
 
 from context import gephi
-from gephi import tools as to
+from gephi import mixin_tools as to
 
-FOLD = "res/"
+FOLD = "res/scopus/"
 
 class TestCosSim(unittest.TestCase):
     @classmethod
@@ -22,7 +22,7 @@ class TestCosSim(unittest.TestCase):
         for f in self.fs:
             df = pd.read_csv(FOLD+f)
             ti = df.iloc[:10000]["Title"]
-            ics = to.cossim(ti)
+            ics = to.get_internal_cosine_similarity(ti)
             print(f, ics)
         
 if __name__ == '__main__':

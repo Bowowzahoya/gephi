@@ -14,20 +14,9 @@ See the example/ folder for an example of such a graph.
 USAGE
 Main function is get_nodes_edges(), or the separate versions get_nodes(), get_edges()
 
-import os
-import pandas as pd
-import gephi as gph
+Use a dictionary or Series 'limited_node_sizes' for supplying the size of a node when there is a limit in export size (Scopus: 20,000 papers, Lens: 50,000 patents/papers)
 
-folder = "scopus exports"
-fnames = os.listdir(folder)
-real_ams = pd.read_excel("real_ams.xlsx", squeeze=True, header=False, index_col=0) # real_ams.xlsx has first row filename (without folder), second row amounts
+There is also the flag 'includes_internal_similarity' to calculate the internal similarity within a node, though this will take a bit longer. 
 
-nodes = gph.get_nodes(fnames, fold=folder, real_ams=real_ams)
-edges = gph.get_edges(fnames, fold=folder, real_ams=real_ams)
-
-nodes.to_excel("nodes.xlsx")
-edges.to_excel("edges.xlsx")
-
-There is also the option to calculate the internal similarity within a node, though this will take a bit longer. Use:
-nodes = get_nodes(fnames, fold=folder, int_sim=True)
+nodes = get_nodes(fnames, imited_node_sizes = sr, includes_internal_similarity=True)
 

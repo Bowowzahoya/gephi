@@ -1,0 +1,119 @@
+# -*- coding: utf-8 -*-
+"""
+Functions for dealing with Lens patent data
+all on the basis of filename
+
+- get_node()
+- get_edge()
+- get_int_sim(): internal cosine similarity
+"""
+
+import pandas as pd
+
+from ..mixin_tools import get_internal_cosine_similarity
+from ..constants import LENS_ID_COL, TITLE_COL
+
+class NodeGetter():
+    MAX_EXPORT_LENGTH = 50_000
+    MARGIN = 10
+    def __init__(self, limited_node_sizes=pd.Series()):
+        # supplied for nodes with more documents than the export maximum
+        self.limited_node_sizes = limited_node_sizes
+        
+    def get_node_size(self, filename):
+        if filename in self.limited_node_sizes.index:
+            return self.limited_node_sizes[filename]
+        
+        # else:
+        lens_export = _read(filename)
+        
+        max_export_length = NodeGetter.MAX_EXPORT_LENGTH-NodeGetter.MARGIN
+        if len(lens_export) >= max_export_length:
+            print(f"WARNING: export '{filename}' at max length"+\
+                  f" of {NodeGetter.MAX_EXPORT_LENGTH}, "+\
+                   " but no node size provided.")
+        return len(lens_export)
+    
+    def get_node_internal_similarity(self, filename, 
+                                     max_length_to_calc=20_000, 
+                                     **kwargs):
+        lens_export = _read(filename)
+        lens_export = lens_export.iloc[:max_length_to_calc]
+        
+        titles = lens_export[TITLE_COL].copy()
+        titles = titles.dropna()
+        
+        internal_cossim = get_internal_cosine_similarity(titles, 
+                                                         **kwargs)
+        return internal_cossim
+    
+class EdgeGetter():
+    def __init__(self, limited_node_sizes=pd.Series()):
+        # supplied for nodes with more documents than the export maximum
+        self.limited_node_sizes = limited_node_sizes
+        
+        # will accumulate as get_edge gets run
+        # stores information that makes it possible to avoid recalculating
+        # parameters for reverse edges
+        self.overlap_sizes = pd.Series()
+        self.node_sizes = pd.Series()
+        self.min_coverages = pd.Series()
+        
+    def get_edge(self, filename1, filename2):
+        edge_name = _unify_edge_name(filename1, filename2)
+        if edge_name in self.overlap_sizes.index:
+            return self.get_edge_from_cache(filename1, filename2)
+        else:
+            return self.calculate_and_cache_edge(filename1, filename2)
+        
+    def calculate_and_cache_edge(self, filename1, filename2):
+        lens_export1 = _read(filename1)
+        lens_export2 = _read(filename2)
+        
+        node1_size = self.limited_node_sizes.get(filename1, len(lens_export1))
+        node2_size = self.limited_node_sizes.get(filename2, len(lens_export2))
+    
+        node1_coverage = len(lens_export1)/node1_size
+        node2_coverage = len(lens_export2)/node2_size
+        min_coverage = min(node1_coverage, node2_coverage)
+        
+        overlap_msk = lens_export1[LENS_ID_COL].isin(lens_export2[LENS_ID_COL])
+        overlap = lens_export1[overlap_msk]
+        overlap_size = len(overlap)
+        
+        # cache
+        edge_name = _unify_edge_name(filename1, filename2)
+        self.overlap_sizes[edge_name] = overlap_size
+        self.node_sizes[filename1] = node1_size
+        self.node_sizes[filename2] = node2_size
+        self.min_coverages[edge_name] = min_coverage
+        
+        return (overlap_size/node1_size)/min_coverage
+    
+    def get_edge_from_cache(self, filename1, filename2):
+        edge_name = _unify_edge_name(filename1, filename2)
+        overlap_size = self.overlap_sizes[edge_name]
+        node1_size = self.nodes_sizes[filename1]
+        min_coverage = self.min_coverages[edge_name]
+        
+        return (overlap_size/node1_size)/min_coverage
+        
+    
+def _read(filename):
+    return pd.read_csv(fname, 
+                       error_bad_lines=False, 
+                       warn_bad_lines=False)
+
+def _unify_edge_name(filename1, filename2):
+    # need same name regardless of order
+    sorted_filenames = sorted([filename1, filename2])
+    return "-".join(sorted_filenames)
+
+
+
+
+
+
+    
+    
+
