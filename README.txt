@@ -18,5 +18,10 @@ Use a dictionary or Series 'limited_node_sizes' for supplying the size of a node
 
 There is also the flag 'includes_internal_similarity' to calculate the internal similarity within a node, though this will take a bit longer. 
 
-nodes = get_nodes(fnames, imited_node_sizes = sr, includes_internal_similarity=True)
+nodes = get_nodes(fnames, limited_node_sizes = sr, includes_internal_similarity=True)
+
+To use Scopus export files set database="scopus" (default)
+To use Lens export files (either patent or scholarly, both works), set database="lens"
+
+nodes = get_nodes(fnames, limited_node_sizes = sr, includes_internal_similarity=True, database="lens")
 
