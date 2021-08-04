@@ -32,6 +32,7 @@ class NodeGetterMixin():
         
         contents = doc_export[self.CONTENT_COL].copy()
         contents = contents.dropna()
+        print(contents)
         
         internal_cossim = get_internal_cosine_similarity(contents)
         return internal_cossim

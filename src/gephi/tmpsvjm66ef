@@ -5,12 +5,13 @@ import pandas as pd
 from .mixin_tools import get_internal_cosine_similarity
 
 class NodeGetterMixin():
-    def __init__(self, limited_node_sizes=pd.Series(), *args, **kwargs):
+    def __init__(self, limited_node_sizes=pd.Series()):
         # supplied for nodes with more documents than the export maximum
         self.limited_node_sizes = limited_node_sizes
         
     def get_node_size(self, filename):
-
+        print(filename)
+        print(self.limited_node_sizes)
         if filename in self.limited_node_sizes.index:
             return self.limited_node_sizes[filename]
         
@@ -37,7 +38,7 @@ class NodeGetterMixin():
         return internal_cossim
     
 class EdgeGetterMixin():
-    def __init__(self, limited_node_sizes=pd.Series(), *args, **kwargs):
+    def __init__(self, limited_node_sizes=pd.Series()):
         # supplied for nodes with more documents than the export maximum
         self.limited_node_sizes = limited_node_sizes
         

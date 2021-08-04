@@ -9,6 +9,8 @@ class NodeGetter(NodeGetterMixin):
     CONTENT_COL = TITLE_COL
     
     def __init__(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
         super().__init__(*args, **kwargs)
     
 class EdgeGetter(EdgeGetterMixin):

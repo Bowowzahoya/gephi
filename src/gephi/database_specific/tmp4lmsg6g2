@@ -8,13 +8,13 @@ class NodeGetter(NodeGetterMixin):
     MARGIN = 10
     CONTENT_COL = TITLE_COL
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
     
 class EdgeGetter(EdgeGetterMixin):
     ID_COL = EID_COL
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
     
 
