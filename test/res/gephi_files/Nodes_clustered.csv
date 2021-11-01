@@ -1,0 +1,129 @@
+Id,Label,timeset,size,internal similarity,Cluster
+4-Nitrophenol,4-Nitrophenol,,5100,0.018999,3
+Acid-strength,Acid-strength,,1647,0.014044,23
+Active-surface,Active-surface,,7546,0.010798,12
+aerosolization-AND-nanomaterials,aerosolization-AND-nanomaterials,,3804,0.011588,7
+Allotropes of carbon,Allotropes of carbon,,551,0.018276,13
+Anodic Aluminum Oxide,Anodic Aluminum Oxide,,3484,0.019783,10
+Anodic oxidation,Anodic oxidation,,17019,0.013614,24
+Atomic resolution,Atomic resolution,,6991,0.011225,9
+atomic-force-microscopy-AND-nanomaterials,atomic-force-microscopy-AND-nanomaterials,,11110,0.010795,1
+Ball-mill-AND-Nanomaterials,Ball-mill-AND-Nanomaterials,,3293,0.018204,8
+Boron nitride,Boron nitride,,15249,0.016427,0
+Borophene,Borophene,,573,0.021791,33
+Cadmium selenide,Cadmium selenide,,1528,0.023115,19
+Cadmium telluride photovoltaics,Cadmium telluride photovoltaics,,8457,0.018315,14
+Carbide-derived carbon,Carbide-derived carbon,,1366,0.027888,16
+Carbon nanobud,Carbon nanobud,,2122,0.029025,16
+Carbon nanomaterials,Carbon nanomaterials,,5574,0.015826,17
+Carrier dynamics,Carrier dynamics,,3984,0.019839,30
+Cell mechanics,Cell mechanics,,2201,0.014069,1
+Chemical reduction,Chemical reduction,,7778,0.014107,3
+chemical-reduction-AND-nanomaterials,chemical-reduction-AND-nanomaterials,,3953,0.018595,3
+Colloidal gold,Colloidal gold,,38998,0.013039,3
+Conduction band,Conduction band,,18585,0.011166,0
+Controlled NOT gate,Controlled NOT gate,,2873,0.016775,11
+Copper nanoparticle,Copper nanoparticle,,4893,0.016061,3
+Crystallization of polymers,Crystallization of polymers,,1588,0.018211,15
+Dirac (software),Dirac (software),,8160,0.011086,0
+Dirac cone,Dirac cone,,2784,0.01834,0
+Dirac point,Dirac point,,2648,0.017589,0
+dispersion-stability-AND-nanomaterials,dispersion-stability-AND-nanomaterials,,952,0.017761,32
+Double quantum,Double quantum,,3437,0.024001,2
+Double walled,Double walled,,7542,0.014252,25
+Double-layer capacitance,Double-layer capacitance,,2398,0.018,12
+Edge states,Edge states,,5474,0.020655,0
+Effective mass approximation,Effective mass approximation,,1473,0.032921,14
+elastic-modulus-AND-nanomaterials,elastic-modulus-AND-nanomaterials,,2804,0.018087,8
+Electrospinning,Electrospinning,,41073,0.014324,4
+Exciton,Exciton,,33348,0.012001,2
+Exfoliation joint,Exfoliation joint,,8144,0.015104,6
+Force mapping,Force mapping,,393,0.017637,9
+Fullerene,Fullerene,,54188,0.010777,18
+Functionalized graphene,Functionalized graphene,,6252,0.017881,6
+Germanene,Germanene,,830,0.026065,0
+Gold Colloid,Gold Colloid,,548,0.017683,3
+Graphane,Graphane,,654,0.02299,13
+Graphene nanoribbons,Graphene nanoribbons,,17037,0.016491,0
+Graphene,Graphene,,209253,0.011659,0
+Graphite oxide,Graphite oxide,,3874,0.022494,6
+Graphyne,Graphyne,,870,0.025721,0
+Halloysite,Halloysite,,6104,0.011845,28
+hardness-AND-nanomaterials,hardness-AND-nanomaterials,,4824,0.018705,8
+hazard-AND-nanomaterials,hazard-AND-nanomaterials,,2695,0.011427,7
+Hexagonal boron nitride,Hexagonal boron nitride,,6498,0.020228,0
+High surface area,High surface area,,21763,0.013128,5
+Imidazolate,Imidazolate,,3998,0.021425,27
+In-situ-polymerization,In-situ-polymerization,,7736,0.017843,6
+Interface and colloid science,Interface and colloid science,,340,0.015301,19
+Landau quantization,Landau quantization,,4501,0.020618,0
+laser-ablation-AND-nanomaterials,laser-ablation-AND-nanomaterials,,4115,0.025161,3
+Local density of states,Local density of states,,2136,0.014903,0
+Low-energy electron microscopy,Low-energy electron microscopy,,704,0.025316,0
+material-properties-AND-nanomaterials,material-properties-AND-nanomaterials,,3429,0.012154,17
+Mechanical resonance,Mechanical resonance,,2404,0.012323,1
+Mesoporous-carbon,Mesoporous-carbon,,6790,0.023332,5
+Mesoporous-material,Mesoporous-material,,44508,0.013815,5
+Mesoporous-silica,Mesoporous-silica,,18588,0.015332,5
+metrology-AND-nanomaterials,metrology-AND-nanomaterials,,529,0.013717,1
+Microporous-material,Microporous-material,,15550,0.012161,5
+molecular-beam-epitaxy-AND-nanomaterials,molecular-beam-epitaxy-AND-nanomaterials,,1667,0.032799,21
+Montmorillonite,Montmorillonite,,18211,0.010984,6
+Multiwalled carbon,Multiwalled carbon,,15721,0.017633,4
+MXenes,MXenes,,3923,0.018202,20
+Nanocellulose,Nanocellulose,,5338,0.013917,15
+Nanocomposite,Nanocomposite,,152934,0.012867,4
+Nanocrystal,Nanocrystal,,57866,0.010267,2
+Nanoelectronics,Nanoelectronics,,13866,0.008118,0
+Nanofiber,Nanofiber,,68351,0.013256,4
+Nanofoam,Nanofoam,,374,0.018019,5
+Nanoindenter,Nanoindenter,,2080,0.014075,1
+Nanomechanical resonator,Nanomechanical resonator,,1635,0.018574,1
+Nanomechanics,Nanomechanics,,7546,0.01006,1
+Nanometrology,Nanometrology,,616,0.015435,1
+Nanoparticle Characterization,Nanoparticle Characterization,,950,0.0179,1
+Nanopore,Nanopore,,17310,0.009568,10
+nanotoxicology,nanotoxicology,,3440,0.013363,7
+Nanotube,Nanotube,,164229,0.01279,4
+Oleylamine,Oleylamine,,2174,0.016148,2
+Optical force,Optical force,,2792,0.013511,1
+Organoclay,Organoclay,,3149,0.020242,6
+Phosphorene,Phosphorene,,2543,0.020258,0
+Pl spectra,Pl spectra,,7744,0.016486,2
+Plasmonic nanoparticles,Plasmonic nanoparticles,,3673,0.016696,3
+pollution-AND-nanomaterials,pollution-AND-nanomaterials,,4815,0.010879,4
+Polyacrylonitrile,Polyacrylonitrile,,14987,0.014053,4
+Porous glass,Porous glass,,1869,0.016826,10
+Quantum circuit,Quantum circuit,,5028,0.015967,11
+Quantum dot,Quantum dot,,86011,0.013826,2
+Quantum point contact,Quantum point contact,,2397,0.024306,2
+Quantum transport,Quantum transport,,4436,0.017362,0
+Quantum-optical spectroscopy,Quantum-optical spectroscopy,,360,0.034114,2
+risks-AND-nanomaterials,risks-AND-nanomaterials,,10594,0.008809,7
+Scanning tunneling spectroscopy,Scanning tunneling spectroscopy,,3432,0.018485,0
+Self-assembling peptide,Self-assembling peptide,,2819,0.02216,4
+Semiconductor nanocrystals,Semiconductor nanocrystals,,3080,0.018679,2
+Silanization,Silanization,,3096,0.011101,26
+Silicene,Silicene,,2723,0.020934,0
+Specific detectivity,Specific detectivity,,867,0.025312,11
+src_2D Materials,src_2D Materials,,1307,0.013469,0
+src_Acta Physico-chimica Sinica,src_Acta Physico-chimica Sinica,,2355,0.009574,29
+src_Fullerenes-Nanotubes-and-Carbon-Nanostructures,src_Fullerenes-Nanotubes-and-Carbon-Nanostructures,,1908,0.01334,18
+src_Journal of Porous Materials,src_Journal of Porous Materials,,1714,0.014845,5
+src_Microchimica Acta,src_Microchimica Acta,,2212,0.024912,31
+src_Microporous and Mesoporous Materials,src_Microporous and Mesoporous Materials,,7291,0.012109,5
+src_Mikrochimica acta,src_Mikrochimica acta,,2152,0.023185,4
+stabilizing-agents-AND-nanomaterials,stabilizing-agents-AND-nanomaterials,,3112,0.020356,3
+Stanene,Stanene,,441,0.030996,0
+Strain engineering,Strain engineering,,2962,0.013812,22
+Strengthening mechanisms of materials,Strengthening mechanisms of materials,,2131,0.02257,8
+Surface elasticity,Surface elasticity,,1074,0.023381,9
+Surface force,Surface force,,4186,0.008984,1
+Tensile strain,Tensile strain,,9417,0.009851,22
+toxicity-AND-nanomaterials,toxicity-AND-nanomaterials,,44638,0.010177,7
+Transition metal carbides,Transition metal carbides,,1325,0.022734,20
+Tunnel effect,Tunnel effect,,2969,0.011013,2
+uniform-size-AND-nanomaterials,uniform-size-AND-nanomaterials,,2381,0.013444,7
+Upconversion luminescence,Upconversion luminescence,,2801,0.027752,2
+Van der waals heterostructures,Van der waals heterostructures,,2326,0.032739,0
+vapor-liquid-solid-method-AND-nanomaterials,vapor-liquid-solid-method-AND-nanomaterials,,1761,0.027336,21

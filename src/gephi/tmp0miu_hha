@@ -1,0 +1,31 @@
+import pandas as pd
+from .constants import *
+
+def get_cluster_info(exported_nodes, edges):
+    clusters = pd.DataFrame()
+    groupby = exported_nodes.groupby(CLUSTER_COL)
+    
+    clusters[MEAN_INTERNAL_SIMILARITY_COL] = groupby.apply(_get_weighted_mean, EXPORTED_INTERNAL_SIMILARITY_COL)
+    
+    for cluster in clusters.index:
+        ids_in_cluster = exported_nodes.loc[exported_nodes[CLUSTER_COL] == cluster, ID_COL]
+        ids_out_cluster = exported_nodes.loc[exported_nodes[CLUSTER_COL] != cluster, ID_COL]
+    
+        
+    return clusters
+
+
+
+
+def _get_weighted_mean(nodes, column_name, size_col=EXPORTED_SIZE_COL):
+    return (nodes[size_col]*nodes[column_name]).sum()/nodes[size_col].sum()
+
+def _get_overlap_from_weights(edges, sizes):    
+    edges = edges.set_index(SOURCE_COL, drop=True)
+    for source in sizes.index:
+        edges[OVERLAP_COL] = edges[WEIGHT_COL]*sizes
+    edges = edges.reset_index()
+    return edges
+    
+    
+    

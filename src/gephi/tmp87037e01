@@ -1,0 +1,43 @@
+import pandas as pd
+from .constants import *
+
+def get_cluster_info(exported_nodes, edges):
+    clusters = pd.DataFrame()
+    groupby = exported_nodes.groupby(CLUSTER_COL)
+    
+    clusters[MEAN_INTERNAL_SIMILARITY_COL] = groupby.apply(_get_weighted_mean, EXPORTED_INTERNAL_SIMILARITY_COL)
+    
+    for cluster in clusters.index:
+        print(cluster)
+        ids_in_cluster = exported_nodes.loc[exported_nodes[CLUSTER_COL] == cluster].index
+        ids_out_cluster = exported_nodes.loc[exported_nodes[CLUSTER_COL] != cluster].index
+        print(ids_in_cluster)
+        nodes_in_cluster = exported_nodes.loc[ids_in_cluster]
+        edges_in_cluster = edges.loc[edges[SOURCE_COL].isin(ids_in_cluster.to_list())]
+        
+        nodes_out_cluster = exported_nodes.loc[ids_out_cluster]
+        edges_out_cluster = edges.loc[edges[SOURCE_COL].isin(ids_out_cluster.to_list())]
+        
+        
+        sizes_of_overlap = _get_overlap_from_weights(edges_in_cluster, nodes_in_cluster[EXPORTED_SIZE_COL])
+        
+        clusters[MIN_CLUSTER_SIZE_COL] = nodes_in_cluster[EXPORTED_SIZE_COL].sum()-sizes_of_overlap.sum()
+        clusters[MAX_CLUSTER_SIZE_COL] = nodes_in_cluster[EXPORTED_SIZE_COL].sum()-sizes_of_overlap.max()
+    return clusters
+
+
+
+
+def _get_weighted_mean(nodes, column_name, size_col=EXPORTED_SIZE_COL):
+    return (nodes[size_col]*nodes[column_name]).sum()/nodes[size_col].sum()
+
+def _get_overlap_from_weights(edges, sizes):
+    overlap = pd.Series(index=edges.index)
+    for source in sizes.index:
+        mask = edges[SOURCE_COL] == source
+        overlap.loc[mask] = edges.loc[mask, WEIGHT_COL]*sizes.loc[source]
+    return overlap
+
+
+    
+    
