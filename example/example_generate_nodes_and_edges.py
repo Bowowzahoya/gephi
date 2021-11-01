@@ -13,13 +13,13 @@ folder = "scopus exports/"
 fnames = [folder+f for f in os.listdir(folder)]
 
 # the true amounts for keywords with more publications than the
-# maximum limit of 20,000 for downloading
+# maximum limit of 20,000 (Scopus) / 50,000 (Lens) for downloading
 limited_node_sizes_fname = "True Amounts.xlsx"
 limited_node_sizes = pd.read_excel(limited_node_sizes_fname,
                                    header=None, index_col=0, squeeze=True)
 
 # calculate nodes
-# int_sim=True to calculate internal similarity
+# includes_internal_similarity=True to calculate internal similarity
 # set False for faster performance
 # if using Lens exports (patents or scholarly both work) instead of 
 # Scopus, set database="lens"
