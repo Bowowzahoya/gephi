@@ -1,10 +1,12 @@
 import pandas as pd
 import unittest
+import os
 
 from context import gephi
 from gephi import clusters as cl
 
-FOLD = "res/gephi_files/"
+THIS_FOLDER = os.path.dirname(__file__)
+FOLD = THIS_FOLDER+"/res/gephi_files/"
 
 @unittest.skip
 class TestClusters(unittest.TestCase):
@@ -13,12 +15,10 @@ class TestClusters(unittest.TestCase):
         cls.TEST_NODES = pd.read_csv(FOLD+"Nodes_clustered.csv", index_col=0)
         cls.TEST_EDGES = pd.read_excel(FOLD+"edges.xlsx", index_col=0)
         
-    @unittest.skip
     def test_get_cluster(self):
-        print(self.TEST_NODES)
         clusters = cl.get_cluster_info(self.TEST_NODES, self.TEST_EDGES)
-        print(clusters)
-        clusters.to_excel("out/clusters.xlsx")
+        clusters.to_excel(THIS_FOLDER+"/out/clusters.xlsx")
+        assert clusters.loc[0, "Maximum Size of Cluster"] == 319401
         
     def test_get_overlap_from_weights(self):
         overlap = cl._get_overlap_from_weights(self.TEST_EDGES, self.TEST_NODES["size"])
@@ -44,7 +44,9 @@ class TestClustersNodes(unittest.TestCase):
         
     def test_get_cluster_info_nodes(self):
         nodes = cl.get_cluster_info_nodes(self.TEST_NODES, self.TEST_EDGES)
-        nodes.to_excel("out/nodes_with_info.xlsx")
+        nodes.to_excel(THIS_FOLDER+"/out/nodes_with_info.xlsx")
+        assert round(nodes.loc["Conduction band", "Mean Weight of Edges Inside Cluster"],5) == 0.00874
+
 
 if __name__ == '__main__':
     unittest.main()

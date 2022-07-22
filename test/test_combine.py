@@ -10,8 +10,10 @@ import os
 
 from context import gephi
 from gephi import combine as cb
+import os
 
-FOLD = "res/scopus/"
+THIS_FOLDER = os.path.dirname(__file__)
+FOLD = THIS_FOLDER+"/res/scopus/"
 
 class TestGetNodesEdges(unittest.TestCase):
     @classmethod
@@ -27,27 +29,27 @@ class TestGetNodesEdges(unittest.TestCase):
     @unittest.skip
     def testNodes(self):
         dfn = cb.get_nodes(self.fnames, limited_node_sizes=self.known_ams)
-        dfn.to_excel("out/nodes.xlsx")
+        dfn.to_excel(THIS_FOLDER+"/out/nodes.xlsx")
         assert dfn.loc["drug delivery system", "Size"] == 110301
         
     def testNodesLimitedAmounts(self):
         dfn = cb.get_nodes(self.fnames, includes_internal_similarity = True,
                         limited_node_sizes=self.known_ams,
                         max_length_to_calc=10)
-        dfn.to_excel("out/nodes_limited.xlsx")
+        dfn.to_excel(THIS_FOLDER+"/out/nodes_limited.xlsx")
         assert round(dfn.loc["drug delivery system", "Internal similarity"],3) == 0.024
 
     @unittest.skip
     def testNodesIntSim(self):
         dfn = cb.get_nodes(self.fnames, limited_node_sizes=self.known_ams, 
                         includes_internal_similarity = True)
-        dfn.to_excel("out/nodes_int_sim.xlsx")
+        dfn.to_excel(THIS_FOLDER+"/out/nodes_int_sim.xlsx")
         assert dfn.loc["drug delivery system", "Size"] == 110301
         
     @unittest.skip
     def testEdges(self):
         dfe = cb.get_edges(self.fnames, limited_node_sizes=self.known_ams)
-        dfe.to_excel("out/edges.xlsx")
+        dfe.to_excel(THIS_FOLDER+"/out/edges.xlsx")
         assert round(dfe.loc[8, "Weight"], 3) == 0.168
         
 

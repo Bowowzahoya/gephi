@@ -9,8 +9,10 @@ import pandas as pd
 
 from context import gephi
 from gephi.database_specific import scopus as sc
+import os
 
-FOLD = "res/scopus/"
+THIS_FOLDER = os.path.dirname(__file__)
+FOLD = THIS_FOLDER+"/res/scopus/"
 
 class TestGetEdge(unittest.TestCase):
     def testGetEdgeWeak(self):

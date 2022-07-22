@@ -9,8 +9,10 @@ import pandas as pd
 
 from context import gephi
 from gephi.database_specific import lens_patent as lp
+import os
 
-FOLD = "res/lens_patent/"
+THIS_FOLDER = os.path.dirname(__file__)
+FOLD = THIS_FOLDER+"/res/lens_patent/"
 
 
 class TestGetEdge(unittest.TestCase):

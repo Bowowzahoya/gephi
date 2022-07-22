@@ -1,10 +1,13 @@
 import pandas as pd
 from .constants import *
 
+import logging
+log = logging.getLogger(__name__)
+
 def get_cluster_info(exported_nodes, edges):
     columns = [INSIDE_WEIGHT_COL, OUTSIDE_WEIGHT_COL, 
-               MEAN_INTERNAL_SIMILARITY_COL, 
-               MIN_CLUSTER_SIZE_COL, MAX_CLUSTER_SIZE_COL]
+        MEAN_INTERNAL_SIMILARITY_COL, 
+        MIN_CLUSTER_SIZE_COL, MAX_CLUSTER_SIZE_COL]
 
     clusters = pd.DataFrame(columns=columns)
     sizes = exported_nodes[EXPORTED_SIZE_COL]
@@ -34,7 +37,7 @@ def get_cluster_info(exported_nodes, edges):
             
             cluster_weights = _get_weighted_mean_weights(nodes_in_cluster, edges_in_cluster2, sizes, skip_one=False)
             clusters.loc[cluster, WEIGHT_PREFIX_COL+str(cluster2)] = \
-               (cluster_weights*sizes[cluster_weights.index]).sum()/sizes[cluster_weights.index].sum()
+                (cluster_weights*sizes[cluster_weights.index]).sum()/sizes[cluster_weights.index].sum()
         
     return clusters
 
@@ -97,7 +100,7 @@ def _get_sizes(clusters, edges_in_cluster, nodes_in_cluster):
     sizes_of_overlap = _get_overlap_from_weights(edges_in_cluster, nodes_in_cluster[EXPORTED_SIZE_COL])
         
     return max(nodes_in_cluster[EXPORTED_SIZE_COL].sum()-sizes_of_overlap.sum(), 
-                                                      nodes_in_cluster[EXPORTED_SIZE_COL].max()), \
+        nodes_in_cluster[EXPORTED_SIZE_COL].max()), \
         nodes_in_cluster[EXPORTED_SIZE_COL].sum()-sizes_of_overlap.max() 
     
     return clusters
@@ -117,17 +120,17 @@ def _get_overlap_from_weights(edges, sizes, skip_one=True):
     return overlap
 
 def _get_weighted_mean_weights(nodes, edges, sizes, skip_one=True, col=TARGET_COL):
-    weights = pd.Series(index=nodes.index)
+    weights = pd.Series(index=nodes.index, dtype="object")
     for node in nodes.index:
         node_edges = edges.loc[edges[SOURCE_COL] == node]
         weights[node] = _get_weighted_mean_weight(node_edges, sizes, 
-                                                  skip_one=skip_one, col=col)
+            skip_one=skip_one, col=col)
     return weights
         
     
 
 def _get_weighted_mean_weight(one_node_edges, sizes, 
-                              skip_one=True, col=TARGET_COL):
+        skip_one=True, col=TARGET_COL):
     if skip_one:
         one_node_edges.loc[one_node_edges[WEIGHT_COL] == 1, WEIGHT_COL] = 0
     one_node_edges = one_node_edges.set_index(col)

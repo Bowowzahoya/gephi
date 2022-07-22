@@ -8,6 +8,9 @@ import pandas as pd
 from .database_specific import scopus as sc
 from .database_specific import lens_patent as lp
 from .constants import ID_COL, LABEL_COL, SIZE_COL, INTERNAL_SIMILARITY_COL
+
+import logging
+log = logging.getLogger(__name__)
             
 def get_nodes(filenames, database="scopus", 
               includes_internal_similarity=False, **kwargs):
@@ -17,21 +20,21 @@ def get_nodes(filenames, database="scopus",
                                                                      **kwargs)
     
     for filename in filenames:
-        print(f"Determining label for '{filename}'...")
+        log.info(f"Determining label for '{filename}'...")
         label = get_node_label(filename)
-        print(f"  {label}")
+        log.info(f"  {label}")
         nodes.loc[label, LABEL_COL] = label
         
-        print(f"Determining node size for '{filename}'...")
+        log.info(f"Determining node size for '{filename}'...")
         size = get_node_size(filename)
-        print(f"  {size}")
+        log.info(f"  {size}")
         nodes.loc[label, SIZE_COL] = size
             
         if includes_internal_similarity:
-            print(f"Determining node internal similarity for '{filename}'...")
+            log.info(f"Determining node internal similarity for '{filename}'...")
             internal_similarity = get_node_internal_similarity(filename, 
                                                                **kwargs)
-            print(f"  {internal_similarity}")
+            log.info(f"  {internal_similarity}")
             nodes.loc[label, INTERNAL_SIMILARITY_COL] = internal_similarity
 
     return nodes

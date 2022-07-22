@@ -10,16 +10,19 @@ from .database_specific import lens_patent as lp
 from .constants import ID_COL, SOURCE_COL, TARGET_COL, WEIGHT_COL
 from .nodes import get_node_label
 
+import logging
+log = logging.getLogger(__name__)
+
 def get_edges(filenames, database="scopus", **kwargs):
     edges = _get_empty_edges_dataframe()
     edge_getter = EdgeGetter(database)
         
     for filename1 in filenames:
-        print(f"Reading edges for '{filename1}'")
+        log.info(f"Reading edges for '{filename1}'")
         for filename2 in filenames:
             if filename1==filename2:
                 continue
-            print(f"\twith '{filename2}'...")
+            log.info(f"\twith '{filename2}'...")
             new_edge = edge_getter.get_edge(filename1, filename2, **kwargs)
             edges = edges.append(new_edge, ignore_index=True)
     return edges
@@ -42,9 +45,9 @@ class EdgeGetter():
         edge[SOURCE_COL] = label1
         edge[TARGET_COL] = label2
 
-        print(f"\t  Determining weight for '{filename1}' and '{filename2}'...")
+        log.info(f"\t  Determining weight for '{filename1}' and '{filename2}'...")
         weight = self.get_edge_weight(filename1, filename2)
-        print(f"\t  {weight}")
+        log.info(f"\t  {weight}")
         edge[WEIGHT_COL] = weight
     
         return edge

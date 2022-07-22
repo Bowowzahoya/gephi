@@ -4,29 +4,30 @@ import pandas as pd
 
 from .mixin_tools import get_internal_cosine_similarity
 
+import logging
+log = logging.getLogger(__name__)
+
 class NodeGetterMixin():
-    def __init__(self, limited_node_sizes=pd.Series(), *args, **kwargs):
+    def __init__(self, limited_node_sizes=pd.Series(dtype="object"), *args, **kwargs):
         # supplied for nodes with more documents than the export maximum
         self.limited_node_sizes = limited_node_sizes
         
     def get_node_size(self, filename):
-
         if filename in self.limited_node_sizes.index:
             return self.limited_node_sizes[filename]
         
-        # else:
         doc_export = _read(filename)
         
         max_export_length = self.MAX_EXPORT_LENGTH-self.MARGIN
         if len(doc_export) >= max_export_length:
-            print(f"WARNING: export '{filename}' at max length"+\
-                  f" of {self.MAX_EXPORT_LENGTH}, "+\
-                   " but no node size provided.")
+            log.warning(f"Export '{filename}' at max length"+\
+                f" of {self.MAX_EXPORT_LENGTH}, "+\
+                " but no node size provided.")
         return len(doc_export)
     
     def get_node_internal_similarity(self, filename, 
-                                     max_length_to_calc=20_000, 
-                                     **kwargs):
+            max_length_to_calc=20_000, 
+            **kwargs):
         doc_export = _read(filename)
         doc_export = doc_export.iloc[:max_length_to_calc]
         
@@ -37,7 +38,7 @@ class NodeGetterMixin():
         return internal_cossim
     
 class EdgeGetterMixin():
-    def __init__(self, limited_node_sizes=pd.Series(), *args, **kwargs):
+    def __init__(self, limited_node_sizes=pd.Series(dtype="object"), *args, **kwargs):
         # supplied for nodes with more documents than the export maximum
         self.limited_node_sizes = limited_node_sizes
         
@@ -51,10 +52,10 @@ class EdgeGetterMixin():
     def get_edge_weight(self, filename1, filename2):
         edge_name = _unify_edge_name(filename1, filename2)
         if edge_name in self.overlap_sizes.index:
-            print("\t  Loading from cache...")
+            log.info("\t  Loading from cache...")
             return self.get_edge_from_cache(filename1, filename2)
         else:
-            print("\t  Calculating...")
+            log.info("\t  Calculating...")
             return self.calculate_and_cache_edge(filename1, filename2)
         
     def calculate_and_cache_edge(self, filename1, filename2):
@@ -91,9 +92,14 @@ class EdgeGetterMixin():
         
     
 def _read(filename):
-    return pd.read_csv(filename, 
-                       error_bad_lines=False, 
-                       warn_bad_lines=False)
+    if filename[-min(len(filename), 4):] == ".csv":
+        return pd.read_csv(filename, 
+            on_bad_lines="skip")
+    elif filename[-min(len(filename), 5):] == ".xlsx":
+        return pd.read_excel(filename, 
+            on_bad_lines="skip")
+    else:
+        raise Exception(f"filename extension of '{filename}' not recognized.")
 
 def _unify_edge_name(filename1, filename2):
     # need same name regardless of order

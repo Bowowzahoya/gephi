@@ -1,0 +1,6 @@
+name: gephi-venv
+dependencies:
+  - pandas
+  - openpyxl
+  - pip
+  - scikit-learn

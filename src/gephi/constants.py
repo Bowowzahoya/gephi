@@ -19,6 +19,7 @@ WEIGHT_COL = "Weight"
 # Lens
 LENS_ID_COL = "Lens ID"
 TITLE_COL = "Title"
+FIELDS_OF_STUDY_COL = "Fields of Study"
 
 # Scopus
 EID_COL = "EID"

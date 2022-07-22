@@ -1,0 +1,6 @@
+__pycache__/
+.vscode/
+gephi.code-workspace
+.pytest_cache/
+test/__pycache__/
+src/gephi/__pycache__/
